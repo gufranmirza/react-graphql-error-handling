@@ -2,6 +2,7 @@
 import graphene
 from graphql_extensions.exceptions import GraphQLError
 from graphene_django.types import DjangoObjectType
+from time import sleep
 
 from ingredients.models import Category
 
@@ -19,6 +20,8 @@ class Query(object):
 
     @staticmethod
     def resolve_all_categories(self, info, **kwargs):
+        sleep(2)
+
         category_count = Category.objects.all().count()
         # category_count = 2
 
@@ -33,8 +36,10 @@ class Query(object):
 
     @staticmethod
     def resolve_error_400(self, info, **kwargs):
+        sleep(2)
         # Your actual code
         # ...
+
 
         raise GraphQLError(
             message="Something went wrong, please try again",
