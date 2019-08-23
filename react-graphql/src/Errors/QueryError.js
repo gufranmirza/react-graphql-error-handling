@@ -1,6 +1,12 @@
 import React from 'react'
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
+import BounceLoader from 'react-spinners/BounceLoader';
+import Icon from 'antd/lib/icon'
+import Button from 'antd/lib/button';
+import { Link } from 'react-router-dom'
+
+import * as styles from './styles'
 
 const ERROR_400 = gql`
   {
@@ -9,30 +15,49 @@ const ERROR_400 = gql`
 `;
 
 const QueryError = () => (
-  <div className={'w-100 flex justify-center pa6'}>
-    <div className='w-100' style={{maxWidth: 1150}}>
-      <Query query={ERROR_400} errorPolicy="all">
-        {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+  <div>
+    <Query query={ERROR_400} errorPolicy="all">
+      {({ loading, error, data }) => {
+        if (loading) return (
+          <styles.Loader>
+            <BounceLoader
+              sizeUnit={"px"}
+              size={150}
+              color={'#006d75'}
+              loading
+            />
+          </styles.Loader>
+        );
 
-          console.log(error);
+        console.log(error);
 
-          if (error) return (
-            <div className='ma3 box1 new-post br6 flex flex-column justify-center ttu fw6 f20 black-30 no-underline'>
-              Query Level Error handler invoked <br />
-              {error.graphQLErrors.map(({ message, code }, i) => (
-                <span key={i}>
-                  <p>Error Message: {message} </p>
-                  <p>Code: {code} </p>
-                </span>
-              ))}
-            </div>
-          ) ;
+        if (error) return (
+          <styles.Root>
+            <Link to="/" >
+              <Button  >
+                <Icon type="left" /> Home
+              </Button>
+            </Link>
+            <br /><br />
 
-          return <h1>Some Query result data to be displayed</h1>;
-        }}
-      </Query>
-    </div>
+            {error.graphQLErrors[0].code === 400 && (
+              <styles.Card>
+                <div><Icon type="fire" /></div>
+                <div>Coul'd not get data at this time, try again...</div><br />
+                <Button>Retry...</Button>
+              </styles.Card>
+            )}
+            
+
+            <br /><br />
+            <b>Query Level Error handler invoked </b><br /><hr /><br />
+            <pre>{JSON.stringify(error, null, 2) }</pre>
+          </styles.Root>
+        ) ;
+
+        return <h1>Some Query result data to be displayed</h1>;
+      }}
+    </Query>
   </div>
 );
 

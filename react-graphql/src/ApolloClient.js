@@ -17,7 +17,7 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
         case 403:
           // Your Error handling logic here
           window.alert(
-            "You are not AUTHORIZED. Please login first \n Application Error handler invoked \n CODE: 403"
+            `Application Error handler invoked \n message: ${err.message} \n code: ${err.code}`
           )
           window.location.href = "/login"
           return null

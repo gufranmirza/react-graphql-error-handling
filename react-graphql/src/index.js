@@ -13,6 +13,7 @@ import QueryError from './Errors/QueryError'
 
 import './index.css'
 import 'tachyons'
+import 'antd/dist/antd.css';
 
 import client from './ApolloClient'
 

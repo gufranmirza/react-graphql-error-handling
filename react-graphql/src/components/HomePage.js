@@ -1,30 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Icon from 'antd/lib/icon'
+
+import * as styles from './styles'
 
 const Home = () => (
-  <div className={'w-100 flex justify-center pa6'}>
-    <div className='w-100 flex flex-wrap' style={{maxWidth: 1150}}>
+  <styles.Root>
+    <styles.Card>
       <Link
         to='/protected-page'
-        className='ma3 box new-post br2 flex flex-column items-center justify-center ttu fw6 f20 black-30 no-underline'
       >
-        <div>Show an Application Level Error Handling</div>
+        <div><Icon type="close-circle" /></div>
+        Show an Application Level Error Handling
       </Link>
+    </styles.Card>
+
+    <styles.Card>
       <Link
         to='/query-level-error'
-        className='ma3 box new-post br2 flex flex-column items-center justify-center ttu fw6 f20 black-30 no-underline'
       >
-        <div>Show an Query Level Error Handling</div>
+        <div><Icon type="issues-close" /></div>
+        Show an Query Level Error Handling
       </Link>
-
+    </styles.Card>
+    
+    <styles.Card>
       <Link
         to='/all-categories'
-        className='ma3 box new-post br2 flex flex-column items-center justify-center ttu fw6 f20 black-30 no-underline'
       >
-        <div>Show all Ingredient Categories</div>
+        <div><Icon type="check" /></div>
+        Show all Ingredient Categories
       </Link>
-    </div>
-  </div>
+    </styles.Card>
+  </styles.Root>
 )
 
 export default Home

@@ -1,12 +1,26 @@
 import React from 'react'
+import Icon from 'antd/lib/icon'
+import Button from 'antd/lib/button';
+import { Link } from 'react-router-dom'
+
+import * as styles from './styles'
 
 const LogIN = () => (
-  <div className={'w-100 flex justify-center pa6'}>
-    <div className='w-100 flex flex-wrap' style={{maxWidth: 1150}}>
-        <div className='ma3 box new-post br2 flex flex-column items-center justify-center ttu fw6 f20 black-30 no-underline'>
-          Login Page
+  <div>
+    <styles.Table >  
+      <Link to="/" >
+        <Button  >
+          <Icon type="left" /> Home
+        </Button>
+      </Link><br /><br />
+
+      <styles.Card>
+        <div>
+          <div> <Icon type="unlock" /> </div> <br />
+          <div>login to account your account first</div>
         </div>
-    </div>
+      </styles.Card>
+    </styles.Table>
   </div>
 )
 
